@@ -12,12 +12,13 @@ namespace Infraestrutura
 		private readonly UserDbContext _context = new UserDbContext();
 		public void Add(Employee employee)
 		{
-			
+			_context.Employes.Add(employee);
+			_context.SaveChanges();	
 		}
 
 		public List<Employee> Get()
 		{
-			throw new NotImplementedException();
+			return _context.Employes.ToList();
 		}
 	}
 }

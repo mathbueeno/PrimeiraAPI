@@ -11,7 +11,7 @@ namespace Infraestrutura
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 			=> optionsBuilder.UseSqlServer(
-				 "Server=localhost,1433;Database=Employee;User ID=sa;Password=1q2w3e4r@#$"
+				 "Server=localhost,1433;Database=Employee;User ID=sa;Password=1q2w3e4r@#$;TrustServerCertificate = True"
 				);
 		
 	}
