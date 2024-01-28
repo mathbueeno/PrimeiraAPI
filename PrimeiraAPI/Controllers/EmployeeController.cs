@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PrimeiraAPI.Models;
 using PrimeiraAPI.ViewModel;
 
@@ -16,7 +17,7 @@ namespace PrimeiraAPI.Controllers
 			_employeeRepository = employeeRepository ?? throw new ArgumentNullException(nameof(employeeRepository));
 		}
 
-		
+		[Authorize]
 		[HttpPost]
 		public IActionResult Add([FromForm] EmployeeViewModel employeeView)
 		{
@@ -30,13 +31,24 @@ namespace PrimeiraAPI.Controllers
 			return Ok();
 		}
 
-
+		[Authorize]
 		[HttpGet]
 		public IActionResult Get()
 		{
 			var employee = _employeeRepository.Get();
 			return Ok(employee);
 
+		}
+
+		[Authorize]
+		[HttpPost]
+		[Route("{id}/download")]
+		public IActionResult DownloadPhoto(int id)
+		{
+			var employee = _employeeRepository.Get(id);
+			var dataBytes = System.IO.File.ReadAllBytes(employee.photo);
+
+			return File(dataBytes, "image/png");
 		}
 	}
 }

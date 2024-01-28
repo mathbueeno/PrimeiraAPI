@@ -20,5 +20,10 @@ namespace Infraestrutura
 		{
 			return _context.Employes.ToList();
 		}
+
+		public Employee? Get(int id)
+		{
+			return _context.Employes.Find(id);
+		}
 	}
 }
