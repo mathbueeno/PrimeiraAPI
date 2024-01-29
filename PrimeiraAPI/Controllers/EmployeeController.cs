@@ -11,6 +11,8 @@ namespace PrimeiraAPI.Controllers
 	{
 
 		private readonly IEmployeeRepository _employeeRepository;
+		private readonly ILogger<EmployeeController> _logger;
+
 
 		public EmployeeController(IEmployeeRepository employeeRepository)
 		{
@@ -30,14 +32,18 @@ namespace PrimeiraAPI.Controllers
 			_employeeRepository.Add(employee);	
 			return Ok();
 		}
-
-		[Authorize]
+				
 		[HttpGet]
-		public IActionResult Get()
+		public IActionResult Get(int pageNumber, int pageQuantity)
 		{
-			var employee = _employeeRepository.Get();
-			return Ok(employee);
+			//string mensagem = "Teve um erro";
+			_logger?.Log(LogLevel.Error, "Teve um erro");
 
+			var employee = _employeeRepository.Get(pageNumber, pageQuantity);
+
+			_logger?.LogInformation("Teve um erro");
+
+			return Ok(employee);
 		}
 
 		[Authorize]

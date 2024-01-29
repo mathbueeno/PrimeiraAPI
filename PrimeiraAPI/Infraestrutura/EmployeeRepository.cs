@@ -25,5 +25,10 @@ namespace Infraestrutura
 		{
 			return _context.Employes.Find(id);
 		}
+
+		public List<Employee> Get(int pageNumber, int pageQuantity)
+		{
+			return _context.Employes.Skip(pageNumber * pageQuantity).Take(pageQuantity).ToList();
+		}
 	}
 }
