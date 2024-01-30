@@ -1,11 +1,12 @@
 ﻿using Azure.Identity;
 using Microsoft.AspNetCore.Mvc;
-using PrimeiraAPI.Models;
-using PrimeiraAPI.Services;
+using PrimeiraAPI.Application.Services;
+using PrimeiraAPI.Domain.Models;
+using PrimeiraAPI.Domain.Models.EmployeeAggregate;
 
 namespace PrimeiraAPI.Controllers
 {
-	[ApiController]
+    [ApiController]
 	[Route("api/v1/auth")]
 	public class AuthController : Controller
 	{

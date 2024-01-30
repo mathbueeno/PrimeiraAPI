@@ -1,10 +1,11 @@
-using Infraestrutura;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PrimeiraAPI;
-using PrimeiraAPI.Models;
+using PrimeiraAPI.Application.Map;
+using PrimeiraAPI.Domain.Models.EmployeeAggregate;
+using PrimeiraAPI.Infraestrutura.Repositories;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -63,6 +64,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 
+builder.Services.AddAutoMapper(typeof(DomainToDTOMapping));
 
 
 var key = Encoding.ASCII.GetBytes(Key.Secret);

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PrimeiraAPI.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20240124224319_FirstMigration")]
+    [Migration("20240130222140_FirstMigration")]
     partial class FirstMigration
     {
         /// <inheritdoc />
@@ -24,7 +24,24 @@ namespace PrimeiraAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("PrimeiraAPI.Models.Employee", b =>
+            modelBuilder.Entity("PrimeiraAPI.Domain.Models.CompanyAggregate.Company", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("company");
+                });
+
+            modelBuilder.Entity("PrimeiraAPI.Domain.Models.EmployeeAggregate.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
